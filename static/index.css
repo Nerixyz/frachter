@@ -1,0 +1,259 @@
+:root {
+    --theme-color: #2dde80;
+    --theme-color-dimmed: #25b669;
+    --theme-color-dimmed2: #187041;
+    --warn-color: #ee3b3b;
+}
+
+html {
+}
+
+body {
+    background: #121212;
+    color: #eee;
+    margin: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-bottom: 4rem;
+    margin-top: 0;
+}
+
+#send-file {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.file-input {
+    width: 5rem;
+    height: 5rem;
+    color: var(--theme-color);
+    padding: 5em;
+    border: var(--theme-color) solid 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 0 var(--theme-color);
+    transition: box-shadow 100ms;
+}
+
+.file-input:hover {
+    box-shadow: 1px 1px 15px 0 var(--theme-color);
+}
+
+form:valid .upload-file {
+    display: none;
+}
+
+form:invalid .file-check {
+    display: none;
+}
+
+form:invalid #filename {
+    display: none;
+}
+
+#filename {
+    text-align: center;
+    text-decoration: underline #2dde80;
+    margin-top: 0;
+}
+
+input[type="submit"], button {
+    background: transparent;
+    border: 2px solid var(--theme-color);
+    color: #eee;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 250ms;
+    transition-property: background, color;
+}
+
+:is(input[type="submit"], button):is(:focus, :hover) {
+    background: var(--theme-color);
+    color: black;
+    outline: none;
+}
+
+form:invalid input[type="submit"] {
+    cursor: not-allowed;
+    border-color: var(--warn-color);
+}
+
+#set-token {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #eee5;
+    color: #eee;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    transition: border 150ms;
+}
+
+input[type="text"]:focus {
+    border-bottom-color: var(--theme-color);
+}
+
+.text-input::after {
+    content: ' ';
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 1px;
+    transform: scaleX(0%);
+    background: var(--theme-color);
+    transition: transform 150ms;
+    transform-origin: right;
+}
+
+.text-input:hover::after {
+    transform: scaleX(100%);
+    transform-origin: left;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+.overlay {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 18, 18, 0.43);
+    animation: overlay-in 200ms forwards;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+@keyframes overlay-in {
+    from {
+        backdrop-filter: blur(0);
+        opacity: 0;
+    }
+    to {
+        backdrop-filter: blur(20px);
+        opacity: 1;
+    }
+}
+
+.overlay-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    width: 5rem;
+    height: 5rem;
+
+    fill: transparent;
+    stroke-linecap: round;
+    animation: rotate cubic-bezier(.46,.03,.52,.96) infinite 1.4s;
+}
+
+.loader > circle {
+    animation: loading infinite cubic-bezier(.46,.03,.52,.96) 1.4s;
+    stroke: var(--theme-color);
+}
+
+@keyframes loading {
+    0% {
+        stroke-dasharray: 0 50;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 30 50;
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dasharray: 30 50;
+        stroke-dashoffset: -30;
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(-90deg); }
+    to { transform: rotate(270deg); }
+}
+
+.error {
+    --theme-color: var(--warn-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.waiting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.waiting a {
+    color: #eeeb;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.waiting .qrcode {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.transferring {
+    position: relative;
+    width: 20rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.transferring .progress {
+    inset: 0;
+    background-color: #0008;
+    position: absolute;
+    z-index: 0;
+
+    transform: scaleX(var(--progress, 0%));
+    transform-origin: left;
+
+    transition: transform 150ms;
+}
+
+.transferring p {
+    z-index: 1;
+    position: relative;
+}

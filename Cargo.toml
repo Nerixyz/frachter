@@ -1,0 +1,28 @@
+[package]
+name = "frachter"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix = "0.13"
+actix-web = { version = "4.2", features = ["cookies"] }
+actix-web-error = "0.1"
+actix-web-lab = "0.18"
+actix-files = "0.6.2"
+bytes = "1.2"
+futures = "0.3.24"
+jsonwebtoken = "8.1"
+mime = "0.3"
+rand = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+time = "0.3"
+tokio = { version = "1.21", features = ["sync"] }
+toml = "0.5"
+tracing = "0.1"
+tracing-actix-web = "0.6.0"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1.1", features = ["v4", "serde"] }
